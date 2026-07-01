@@ -39,7 +39,7 @@ CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE
 > 💡 **Key Innovation:**  
 > CWEMap’s key innovation is its graph-guided, taxonomy-aware reasoning mechanism that converts security patches into phase-aware evidence graphs, aligns them with structurally similar historical vulnerability cases, and predicts valid fine-grained CWE paths through constrained hierarchical decoding.
 
-```text
+
 🎯 [Target Vulnerability-Fixing Commit]
         │
         ▼
@@ -65,7 +65,6 @@ CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE
         ▼
 🏁 [Predicted Terminal CWE Path]
 
----
 
 ## 📊 Datasets
 
@@ -75,8 +74,8 @@ We evaluate CWEMap on two public vulnerability benchmarks: **TREEVUL** [1] and *
 
 **PRIMEVUL** is a large-scale vulnerability benchmark collected from multiple open-source ecosystems. It includes both vulnerable and benign code instances; in CWEMap, CWE-path evaluation is conducted on vulnerability-labeled instances with valid CWE annotations.
 
-## 📂 2. Repository Structure
 
+## 📂 2. Repository Structure
 
 CWEMap/
 ├── README.md
