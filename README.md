@@ -6,64 +6,64 @@ This repository contains the replication package for **CWEMap**:
 
 ![CWEMap Approach Overview](https://github.com/CWEMap/CWEMap/blob/d5f697b026bbc702f28bb528c013e9ed04648087/CWEMap.png?raw=true)
 
-## Overview of CWEMap
-
-CWEMap is a graph-guided hierarchical reasoning framework for fine-grained commit-level Common Weakness Enumeration (CWE) classification of security patches. Given a vulnerability-fixing commit, CWEMap predicts a taxonomy-consistent CWE path by integrating three complementary sources of evidence: patch-evolution semantics, structurally similar historical vulnerability cases, and the CWE taxonomy. Rather than directly classifying raw patch text, CWEMap first retrieves patch-relevant historical cases, then converts the target patch and retrieved cases into phase-aware patch graphs that explicitly model the vulnerable state, repair transformation, and mitigated state of the code change.
-
-The framework then performs graph-based evidence alignment to verify whether retrieved historical cases are structurally compatible with the target patch. Finally, it conducts constrained top-down reasoning over the CWE taxonomy graph to produce a valid terminal CWE path. This design makes CWEMap especially suitable for sparse, noisy, and long-tailed security-patch classification settings, where fine-grained CWE types may be semantically close and difficult to distinguish using surface-level patch tokens alone.
-
-```text
-[Target Vulnerability-Fixing Patch]
-        │
-        ▼
-1. Patch-Aware Vulnerability Retrieval
-   └── Retrieves top-k patch-relevant historical vulnerability cases
-        from a leakage-free training corpus
-        │
-        ▼
-2. Phase-Aware Patch Graph Construction
-   └── Extracts security triples and materializes phase-aware graphs:
-        T_before  : vulnerable pre-patch state
-        T_delta   : repair transformation
-        T_after   : mitigated post-patch state
-        │
-        ▼
-3. Agent-Based Evidence Alignment
-   └── Verifies structurally compatible historical cases using
-        VF2++-based subgraph matching and resonance evidence scoring
-        │
-        ▼
-4. Agent-Based Hierarchical Reasoning
-   └── Performs constrained top-down decoding over the frozen CWE
-        taxonomy graph G_CWE, with confidence-guided refinement
-        │
-        ▼
-[Predicted Terminal CWE Path]
-
-The replication package supports the experiments reported in the ICSE manuscript, including effectiveness comparison, ablation analysis, cross-backbone generalizability, and efficiency analysis.
-
----
+The replication package supports the experiments reported in the manuscript, including effectiveness comparison, ablation analysis, cross-backbone generalizability, and efficiency analysis.
 
 ## 🧭 1. Framework Overview
 
-Given a vulnerability-fixing commit, CWEMap operates across four core stages:
+CWEMap is a graph-guided hierarchical reasoning framework for fine-grained commit-level Common Weakness Enumeration (CWE) classification of security patches. Given a vulnerability-fixing commit, CWEMap predicts a valid CWE path by integrating three complementary sources of evidence: patch-evolution semantics, structurally similar historical vulnerability cases, and the CWE taxonomy. The framework is organized into four core stages: Patch-Aware Vulnerability Retrieval, Phase-Aware Patch Graph Construction, Agent-Based Evidence Alignment, and Agent-Based Hierarchical Reasoning.
 
-### 🔍 Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
-Retrieves patch-relevant historical vulnerability cases from the training corpus while strictly preventing train-test data leakage.
+Rather than directly classifying raw patch text, CWEMap first retrieves patch-relevant historical cases, then converts both the target patch and retrieved cases into phase-aware patch graphs. These graphs explicitly model the vulnerable state, repair transformation, and mitigated state of a code change. CWEMap then verifies structurally compatible historical evidence through graph alignment and performs constrained top-down reasoning over the frozen CWE taxonomy graph to produce a taxonomy-consistent terminal CWE path.
 
-### 🌿 Phase 2: Phase-Aware Patch Graph Construction (PGC)
-Converts each raw code patch into phase-aware security triples:
-* `T_before`: Vulnerable pre-patch state
-* `T_delta`: Repair transformation
-* `T_after`: Mitigated post-patch state
+### 🔎 Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
 
-### 🤝 Phase 3: Agent-Based Evidence Alignment (AEA)
-Aligns target patch graphs with retrieved reference graphs using constrained subgraph matching and multi-dimensional evidence scoring.
+CWEMap first retrieves the top-k patch-relevant historical vulnerability cases from a leakage-free training corpus. Each candidate case is represented using multiple evidence channels, including vulnerable code fragments, patched code fragments, diff hunks, localized method boundaries, and sanitized metadata. To prevent shortcut learning and train-test leakage, validation and test commits are excluded from the retrieval corpus, and label-revealing information such as CVE identifiers, issue links, and explicit CWE mentions is removed before retrieval.
 
-### 🧠 Phase 4: Agent-Based Hierarchical Reasoning (AHR)
-Performs taxonomy-constrained CWE path prediction and confidence-guided refinement over the hierarchical CWE structure.
+### 🧱 Phase 2: Phase-Aware Patch Graph Construction (PGC)
 
-> **Key Innovation:** Unlike traditional approaches that rely solely on lexical patch similarity or unconstrained direct LLM prompting, CWEMap grounds its CWE predictions in explicit, graph-mapped patch semantics and valid structural taxonomy paths.
+CWEMap converts the target patch and retrieved cases into phase-aware security triples that represent the security-relevant transition introduced by the patch. Each patch is modeled using three temporal evidence phases:
+
+- `T_before`: Vulnerable pre-patch state
+- `T_delta`: Repair transformation
+- `T_after`: Mitigated post-patch state
+
+These triples are materialized into directed labeled graphs. The target patch becomes `G_input`, while the retrieved historical cases form the reference graph set `KG_examples`. Together with the frozen CWE taxonomy graph `G_CWE`, these graphs form the structured evidence workspace used by downstream reasoning.
+
+### 🔗 Phase 3: Agent-Based Evidence Alignment (AEA)
+
+CWEMap aligns the target patch graph with retrieved reference graphs to verify whether the retrieved historical cases are structurally compatible with the target security patch. This stage applies constrained subgraph matching, including topology, edge direction, relation compatibility, and phase consistency. It then ranks aligned subgraphs using resonance evidence scoring and produces a graph-aligned evidence package `Z` for hierarchical CWE reasoning.
+
+### 🌳 Phase 4: Agent-Based Hierarchical Reasoning (AHR)
+
+CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE`. Rather than predicting an isolated flat CWE label, it expands only valid child nodes at each hierarchy level and scores candidate CWE paths using graph-aligned evidence, evidence coverage, mapping consistency, and taxonomy validity. If the confidence score is insufficient, CWEMap applies confidence-guided refinement before committing the final prediction.
+
+> 💡 **Key Innovation:**  
+> CWEMap’s key innovation is its graph-guided, taxonomy-aware reasoning mechanism that converts security patches into phase-aware evidence graphs, aligns them with structurally similar historical vulnerability cases, and predicts valid fine-grained CWE paths through constrained hierarchical decoding.
+
+```text
+🎯 [Target Vulnerability-Fixing Commit]
+        │
+        ▼
+🔎 1. Patch-Aware Vulnerability Retrieval (PVR)
+   └── Retrieves top-k patch-relevant historical vulnerability cases
+       from a leakage-free training corpus
+        │
+        ▼
+🧱 2. Phase-Aware Patch Graph Construction (PGC)
+   └── Extracts security triples and materializes phase-aware graphs
+       using T_before, T_delta, and T_after
+        │
+        ▼
+🔗 3. Agent-Based Evidence Alignment (AEA)
+   └── Verifies structurally compatible historical cases through
+       constrained subgraph matching and resonance evidence scoring
+        │
+        ▼
+🌳 4. Agent-Based Hierarchical Reasoning (AHR)
+   └── Performs top-down CWE path prediction over the frozen
+       CWE taxonomy graph G_CWE with confidence-guided refinement
+        │
+        ▼
+🏁 [Predicted Terminal CWE Path]
 
 ---
 
