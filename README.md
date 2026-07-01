@@ -67,6 +67,14 @@ CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE
 
 ---
 
+## 📊 Datasets
+
+We evaluate CWEMap on two public vulnerability benchmarks: **TREEVUL** [1] and **PRIMEVUL** [2].
+
+**TREEVUL** contains real-world security patches annotated with hierarchical CWE paths, making it suitable for evaluating fine-grained commit-level vulnerability type classification under the CWE tree structure.
+
+**PRIMEVUL** is a large-scale vulnerability benchmark collected from multiple open-source ecosystems. It includes both vulnerable and benign code instances; in CWEMap, CWE-path evaluation is conducted on vulnerability-labeled instances with valid CWE annotations.
+
 ## 📂 2. Repository Structure
 
 
@@ -162,3 +170,12 @@ CWEMap/
     │   └── Reproduce cross-backbone generalizability study
     └── reproduce_rq4.sh
         └── Reproduce computational efficiency analysis
+
+
+
+
+### References
+
+[1] S. Pan, L. Bao, X. Xia, D. Lo, and S. Li, “Fine-grained commit-level vulnerability type prediction by CWE tree structure,” in *Proceedings of the IEEE/ACM 45th International Conference on Software Engineering (ICSE)*, 2023, pp. 957–969.
+
+[2] Y. Ding, Y. Fu, O. Ibrahim, C. Sitawarin, X. Chen, B. Alomair, D. Wagner, B. Ray, and Y. Chen, “Vulnerability detection with code language models: How far are we?” in *Proceedings of the IEEE/ACM 47th International Conference on Software Engineering (ICSE)*, 2025, pp. 1729–1741.
