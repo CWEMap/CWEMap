@@ -4,6 +4,8 @@ This repository contains the replication package for **CWEMap**, the framework p
 
 > **CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches**
 
+![CWEMap Approach Overview](https://github.com/CWEMap/CWEMap/blob/d5f697b026bbc702f28bb528c013e9ed04648087/CWEMap.png?raw=true)
+
 CWEMap addresses fine-grained commit-level Common Weakness Enumeration (CWE) classification by combining patch-evolution evidence, structurally similar historical vulnerability cases, and taxonomy-aware hierarchical reasoning. Instead of directly classifying raw patch text, CWEMap abstracts vulnerability-fixing commits into phase-aware patch graphs, aligns them with retrieved historical vulnerability cases, and performs constrained top-down prediction over the CWE taxonomy.
 
 The replication package supports the experiments reported in the ICSE manuscript, including effectiveness comparison, ablation analysis, cross-backbone generalizability, and efficiency analysis.
