@@ -1,12 +1,44 @@
 # 🛠️ CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches
 
-This repository contains the replication package for **CWEMap**, the framework proposed in our ICSE submission:
+This repository contains the replication package for **CWEMap**:
 
 > **CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches**
 
 ![CWEMap Approach Overview](https://github.com/CWEMap/CWEMap/blob/d5f697b026bbc702f28bb528c013e9ed04648087/CWEMap.png?raw=true)
 
-CWEMap addresses fine-grained commit-level Common Weakness Enumeration (CWE) classification by combining patch-evolution evidence, structurally similar historical vulnerability cases, and taxonomy-aware hierarchical reasoning. Instead of directly classifying raw patch text, CWEMap abstracts vulnerability-fixing commits into phase-aware patch graphs, aligns them with retrieved historical vulnerability cases, and performs constrained top-down prediction over the CWE taxonomy.
+## Overview of CWEMap
+
+CWEMap is a graph-guided hierarchical reasoning framework for fine-grained commit-level Common Weakness Enumeration (CWE) classification of security patches. Given a vulnerability-fixing commit, CWEMap predicts a taxonomy-consistent CWE path by integrating three complementary sources of evidence: patch-evolution semantics, structurally similar historical vulnerability cases, and the CWE taxonomy. Rather than directly classifying raw patch text, CWEMap first retrieves patch-relevant historical cases, then converts the target patch and retrieved cases into phase-aware patch graphs that explicitly model the vulnerable state, repair transformation, and mitigated state of the code change.
+
+The framework then performs graph-based evidence alignment to verify whether retrieved historical cases are structurally compatible with the target patch. Finally, it conducts constrained top-down reasoning over the CWE taxonomy graph to produce a valid terminal CWE path. This design makes CWEMap especially suitable for sparse, noisy, and long-tailed security-patch classification settings, where fine-grained CWE types may be semantically close and difficult to distinguish using surface-level patch tokens alone.
+
+```text
+[Target Vulnerability-Fixing Patch]
+        │
+        ▼
+1. Patch-Aware Vulnerability Retrieval
+   └── Retrieves top-k patch-relevant historical vulnerability cases
+        from a leakage-free training corpus
+        │
+        ▼
+2. Phase-Aware Patch Graph Construction
+   └── Extracts security triples and materializes phase-aware graphs:
+        T_before  : vulnerable pre-patch state
+        T_delta   : repair transformation
+        T_after   : mitigated post-patch state
+        │
+        ▼
+3. Agent-Based Evidence Alignment
+   └── Verifies structurally compatible historical cases using
+        VF2++-based subgraph matching and resonance evidence scoring
+        │
+        ▼
+4. Agent-Based Hierarchical Reasoning
+   └── Performs constrained top-down decoding over the frozen CWE
+        taxonomy graph G_CWE, with confidence-guided refinement
+        │
+        ▼
+[Predicted Terminal CWE Path]
 
 The replication package supports the experiments reported in the ICSE manuscript, including effectiveness comparison, ablation analysis, cross-backbone generalizability, and efficiency analysis.
 
