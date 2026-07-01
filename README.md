@@ -151,29 +151,19 @@ CWEMap/
 │   └── aggregate_results.py
 │       └── Generate manuscript-ready tables and metrics
 │
-├── outputs/
-│   ├── logs/
-│   │   └── Runtime logs for each experiment
-│   ├── predictions/
-│   │   └── Predicted CWE paths and intermediate model outputs
-│   ├── metrics/
-│   │   └── Weighted F1, Macro F1, MCC, Path Fraction, and confidence intervals
-│   ├── tables/
-│   │   └── CSV/LaTeX tables corresponding to manuscript results
-│   └── figures/
-│       └── Generated figures and pipeline diagrams
-│
-└── replication/
-    ├── run_all.sh
-    │   └── End-to-end reproduction script for the full artifact
-    ├── reproduce_rq1.sh
-    │   └── Reproduce main effectiveness comparison
-    ├── reproduce_rq2.sh
-    │   └── Reproduce component ablation study
-    ├── reproduce_rq3.sh
-    │   └── Reproduce cross-backbone generalizability study
-    └── reproduce_rq4.sh
-        └── Reproduce computational efficiency analysis
+└── outputs/
+    ├── logs/
+    │   └── Runtime logs for each experiment
+    ├── predictions/
+    │   └── Predicted CWE paths and intermediate model outputs
+    ├── metrics/
+    │   └── Weighted F1, Macro F1, MCC, Path Fraction, and confidence intervals
+    ├── tables/
+    │   └── CSV/LaTeX tables corresponding to manuscript results
+    └── figures/
+        └── Generated figures and pipeline diagrams
+
+
 ```
 
 
