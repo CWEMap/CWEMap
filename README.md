@@ -69,50 +69,96 @@ CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE
 
 ## 📂 2. Repository Structure
 
-```text
+
 CWEMap/
-├── README.md               # Setup and replication instructions
-├── requirements.txt       # Python dependencies (pip)
-├── environment.yml        # Anaconda environment specification
-├── configs/               # Hyperparameter and configuration files
+├── README.md
+│   └── Setup instructions, artifact description, and reproduction workflow
+│
+├── requirements.txt
+│   └── Python dependencies for pip-based installation
+│
+├── environment.yml
+│   └── Conda environment specification for artifact evaluation
+│
+├── configs/
 │   ├── default.yaml
+│   │   └── Default configuration for CWEMap experiments
 │   ├── treevul.yaml
+│   │   └── Dataset-specific configuration for TREEVUL
 │   ├── primevul.yaml
+│   │   └── Dataset-specific configuration for PRIMEVUL
 │   └── llm_backbones.yaml
-├── data/                  # Datasets and taxonomies
-│   ├── raw/               # Raw benchmarks (TreeVul, PrimeVul)
+│       └── Configuration for cross-backbone LLM experiments
+│
+├── data/
+│   ├── raw/
 │   │   ├── treevul/
+│   │   │   └── Raw TREEVUL benchmark files
 │   │   └── primevul/
-│   ├── processed/         # Tokenized, parsed, and graph-ready inputs
+│   │       └── Raw PRIMEVUL benchmark files
+│   │
+│   ├── processed/
 │   │   ├── treevul/
+│   │   │   └── Preprocessed TREEVUL splits and graph-ready inputs
 │   │   └── primevul/
+│   │       └── Preprocessed PRIMEVUL splits and graph-ready inputs
+│   │
 │   └── cwe/
 │       └── cwe_taxonomy.json
-├── src/                   # Core implementation codebase
-│   ├── retrieval/         # Code for PVR phase
-│   ├── graph_construction/# Code for PGC phase
-│   ├── evidence_alignment/# Code for AEA phase
-│   ├── reasoning/         # Code for AHR phase
-│   ├── evaluation/        # Evaluation metric calculation
-│   └── utils/             # Helper utilities and loggers
-├── scripts/               # Single-task execution scripts
+│           └── Frozen CWE taxonomy graph used for hierarchical decoding
+│
+├── src/
+│   ├── retrieval/
+│   │   └── Patch-Aware Vulnerability Retrieval implementation
+│   ├── graph_construction/
+│   │   └── Phase-aware triple extraction and patch graph materialization
+│   ├── evidence_alignment/
+│   │   └── Subgraph matching, structural compatibility checking, and evidence scoring
+│   ├── reasoning/
+│   │   └── Taxonomy-constrained CWE path decoding and confidence-guided refinement
+│   ├── evaluation/
+│   │   └── Metric computation, significance testing, and result aggregation utilities
+│   └── utils/
+│       └── Shared utilities for logging, configuration, caching, and data handling
+│
+├── scripts/
 │   ├── preprocess_data.py
+│   │   └── Preprocess raw datasets into train/validation/test splits
 │   ├── build_retrieval_index.py
+│   │   └── Build the training-only historical retrieval index
 │   ├── run_cwemap.py
+│   │   └── Execute the full CWEMap pipeline
 │   ├── run_baselines.py
+│   │   └── Run baseline methods used in the manuscript
 │   ├── run_ablation.py
+│   │   └── Run leave-one-component-out ablation experiments
 │   ├── run_backbone_study.py
+│   │   └── Evaluate CWEMap across different LLM backbones
 │   ├── run_efficiency.py
+│   │   └── Measure runtime, token usage, and inference cost
 │   └── aggregate_results.py
-├── outputs/               # Evaluation artifacts
-│   ├── logs/              # Runtime execution logs
-│   ├── predictions/       # Model output inference JSONs
-│   ├── metrics/           # Calculated precision, recall, F1 scores
-│   ├── tables/            # LaTeX/CSV tables generated for the paper
-│   └── figures/           # Plot diagrams (PDF/PNG format)
-└── replication/           # One-click reproduction workflows
-    ├── run_all.sh         # Complete pipeline execution
-    ├── reproduce_rq1.sh   # Main effectiveness comparison
-    ├── reproduce_rq2.sh   # Ablation study variants
-    ├── reproduce_rq3.sh   # Cross-backbone evaluation
-    └── reproduce_rq4.sh   # Execution time & resource footprint analysis
+│       └── Generate manuscript-ready tables and metrics
+│
+├── outputs/
+│   ├── logs/
+│   │   └── Runtime logs for each experiment
+│   ├── predictions/
+│   │   └── Predicted CWE paths and intermediate model outputs
+│   ├── metrics/
+│   │   └── Weighted F1, Macro F1, MCC, Path Fraction, and confidence intervals
+│   ├── tables/
+│   │   └── CSV/LaTeX tables corresponding to manuscript results
+│   └── figures/
+│       └── Generated figures and pipeline diagrams
+│
+└── replication/
+    ├── run_all.sh
+    │   └── End-to-end reproduction script for the full artifact
+    ├── reproduce_rq1.sh
+    │   └── Reproduce main effectiveness comparison
+    ├── reproduce_rq2.sh
+    │   └── Reproduce component ablation study
+    ├── reproduce_rq3.sh
+    │   └── Reproduce cross-backbone generalizability study
+    └── reproduce_rq4.sh
+        └── Reproduce computational efficiency analysis
