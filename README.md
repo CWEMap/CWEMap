@@ -42,7 +42,7 @@ CWEMap follows a four-stage graph-guided workflow for fine-grained commit-level 
 
 ## 📊 Datasets
 
-We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** [1] and **PRIMEVUL** [2].
+We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** and **PRIMEVUL**.
 
 The dataset and preprocessing scripts are available in [`Dataset_Preprocessing/`](./Dataset_Preprocessing).
 
@@ -125,15 +125,3 @@ Command to execute with --input --output path
 Write  how we Do ( one line)
 Command to execute with --input --output path
 
-
-## 📚 References
-
-[1] S. Pan, L. Bao, X. Xia, D. Lo, and S. Li,  
-“Fine-grained commit-level vulnerability type prediction by CWE tree structure,”  
-in *Proceedings of the IEEE/ACM 45th International Conference on Software Engineering (ICSE)*,  
-2023, pp. 957–969.
-
-[2] Y. Ding, Y. Fu, O. Ibrahim, C. Sitawarin, X. Chen, B. Alomair, D. Wagner, B. Ray, and Y. Chen,  
-“Vulnerability detection with code language models: How far are we?”  
-in *Proceedings of the IEEE/ACM 47th International Conference on Software Engineering (ICSE)*,  
-2025, pp. 1729–1741.
