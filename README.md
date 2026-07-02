@@ -11,16 +11,10 @@ The replication package supports the experiments reported in the manuscript, inc
 
 CWEMap follows a four-stage graph-guided workflow for fine-grained commit-level CWE classification: it retrieves relevant historical cases, constructs phase-aware patch graphs, aligns structurally compatible evidence, and decodes a valid CWE path over the frozen CWE taxonomy graph.
 
-### 🔎 Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
-Retrieves top-k patch-relevant historical cases from a leakage-free training corpus after removing label-revealing metadata.
-
-### 🧱 Phase 2: Phase-Aware Patch Graph Construction (PGC)
-Extracts security triples from the target patch and retrieved cases, then builds phase-aware graphs using `T_before`, `T_delta`, and `T_after`. The target graph is `G_input`, and retrieved reference graphs form `KG_examples`.
-
-### 🔗 Phase 3: Agent-Based Evidence Alignment (AEA)
-Aligns `G_input` with `KG_examples` through constrained subgraph matching and evidence scoring to produce the graph-aligned package `Z`.
-
-### 🌳 Phase 4: Agent-Based Hierarchical Reasoning (AHR)
+#####  Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
+#####  Phase 2: Phase-Aware Patch Graph Construction (PGC)
+#####  Phase 3: Agent-Based Evidence Alignment (AEA)
+#####  Phase 4: Agent-Based Hierarchical Reasoning (AHR)
 Performs top-down decoding over `G_CWE` to predict a taxonomy-consistent terminal CWE path, with confidence-guided refinement when needed.
 
 ```text
@@ -65,29 +59,10 @@ The datasets are publicly available through Google Drive below.
 
 Download Dataset: [Click here to access the dataset](https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing)
 
-## 📂 Repository Structure
+## 📂 Datasets Structure
 
 ```text
-CWEMap/
-├── README.md
-│   └── Setup instructions, dataset access, and reproduction workflow
-│
-├── requirements.txt
-│   └── Python dependencies for pip-based installation
-│
-├── environment.yml
-│   └── Conda environment specification for evaluation
-│
-├── configs/
-│   ├── default.yaml
-│   │   └── Default configuration for CWEMap experiments
-│   ├── treevul.yaml
-│   │   └── Dataset-specific configuration for TREEVUL
-│   ├── primevul.yaml
-│   │   └── Dataset-specific configuration for PRIMEVUL
-│   └── llm_backbones.yaml
-│       └── Configuration for cross-backbone LLM experiments
-│
+Datasets/
 ├── dataset/
 │   ├── treevul/
 │   │   ├── train_set.json
@@ -98,49 +73,11 @@ CWEMap/
 │       ├── primevul_train.jsonl
 │       ├── primevul_valid.jsonl
 │       └── primevul_test.jsonl
-│   
-├── src/
-│   ├── retrieval/
-│   │   └── Patch-Aware Vulnerability Retrieval implementation
-│   ├── graph_construction/
-│   │   └── Phase-aware triple extraction and patch graph materialization
-│   ├── evidence_alignment/
-│   │   └── Subgraph matching, structural compatibility checking, and evidence scoring
-│   ├── reasoning/
-│   │   └── Taxonomy-constrained CWE path decoding and confidence-guided refinement
-│   ├── evaluation/
-│   │   └── Metric computation, significance testing, and result aggregation utilities
-│   └── utils/
-│       └── Shared utilities for logging, configuration, caching, and data handling
-│
-├── scripts/
-│   ├── preprocess_data.py
-│   │   └── Preprocess raw datasets into train/validation/test splits
-│   ├── build_retrieval_index.py
-│   │   └── Build the training-only historical retrieval index
-│   ├── run_cwemap.py
-│   │   └── Execute the full CWEMap pipeline
-│   ├── run_baselines.py
-│   │   └── Run baseline methods used in the manuscript
-│   ├── run_ablation.py
-│   │   └── Run leave-one-component-out ablation experiments
-│   ├── run_backbone_study.py
-│   │   └── Evaluate CWEMap across different LLM backbones
-│   ├── run_efficiency.py
-│   │   └── Measure runtime, token usage, and inference cost
-│   └── aggregate_results.py
-│       └── Generate manuscript-ready tables and metrics
-│
-└── outputs/
-    ├── logs/
-    │   └── Runtime logs for each experiment
-    ├── predictions/
-    │   └── Predicted CWE paths and intermediate model outputs
-    ├── metrics/
-    │   └── Weighted F1, Macro F1, MCC, and Path Fraction results
-    └── tables/
-        └── CSV/JSON output
 ```
+## 📂 Training Phase
+
+## 📂 Testing Phase
+
 
 ## 📚 References
 
