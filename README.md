@@ -10,9 +10,9 @@ The replication package supports the experiments reported in the manuscript, inc
 
 ## 🧭 1. Framework Overview
 
-CWEMap is a graph-guided hierarchical reasoning framework for fine-grained commit-level Common Weakness Enumeration (CWE) classification of security patches. Given a vulnerability-fixing commit, CWEMap predicts a valid CWE path by integrating three complementary sources of evidence: patch-evolution semantics, structurally similar historical vulnerability cases, and the CWE taxonomy. The framework is organized into four core stages: Patch-Aware Vulnerability Retrieval, Phase-Aware Patch Graph Construction, Agent-Based Evidence Alignment, and Agent-Based Hierarchical Reasoning.
+CWEMap follows a four-stage flow: it retrieves patch-relevant historical cases, converts patches into phase-aware graphs, aligns structurally compatible evidence, and performs top-down CWE taxonomy reasoning.
 
-Rather than directly classifying raw patch text, CWEMap first retrieves patch-relevant historical cases, then converts both the target patch and retrieved cases into phase-aware patch graphs. These graphs explicitly model the vulnerable state, repair transformation, and mitigated state of a code change. CWEMap then verifies structurally compatible historical evidence through graph alignment and performs constrained top-down reasoning over the frozen CWE taxonomy graph to produce a taxonomy-consistent terminal CWE path.
+This enables CWEMap to predict fine-grained, taxonomy-consistent CWE paths from explicit patch-evolution evidence rather than raw patch text alone.
 
 ### 🔎 Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
 
