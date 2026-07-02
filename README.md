@@ -117,3 +117,30 @@ CWEMap follows phase evaluation pipeline. Each phase takes the output of the pre
 
 - `HierarchicalReasoningAgent` decodes the CWE path over the frozen taxonomy graph `GCWE`.
 - The final high-confidence predicted CWE path $\hat{P}$ is saved for evaluation using Weighted F1, Macro F1, MCC, and Path Fraction.
+
+
+
+## ⚙️ Dependencies
+
+Install the required dependencies using pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+## 🔑 LLM API Keys
+
+Set the required API key according to the selected backbone:
+
+```bash
+export DEEPSEEK_API_KEY="your-api-key-here"
+export OPENAI_API_KEY="your-api-key-here"
+export GEMINI_API_KEY="your-api-key-here"
+```
+## 🖥️ Hardware Requirements
+
+A GPU is recommended for faster retrieval, graph construction, and LLM-assisted reasoning.
+
+- **Recommended GPU:** NVIDIA GeForce RTX 3090
+- **Minimum RAM:** 16 GB
+- **Recommended OS:** Ubuntu 22.04 LTS
