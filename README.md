@@ -118,10 +118,8 @@ python scripts/run_cwemap.py \
   --output outputs/pgc/phase_aware_patch_graphs.json
 ```
 #####  Phase 3: Agent-Based Evidence Alignment (AEA)
-Write  how we Do ( one line)
-Command to execute with --input --output path
+
 
 #####  Phase 4: Agent-Based Hierarchical Reasoning (AHR)
-Write  how we Do ( one line)
-Command to execute with --input --output path
+
 
