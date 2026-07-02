@@ -19,7 +19,7 @@ Performs top-down decoding over `G_CWE` to predict a taxonomy-consistent termina
 
 ```text
 🎯 [Target Vulnerability-Fixing Commit]
-        │
+        │ 
         ▼
 🔎 1. Patch-Aware Vulnerability Retrieval (PVR)
    └── Retrieves top-k patch-relevant historical vulnerability cases
