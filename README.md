@@ -1,4 +1,4 @@
-# 🛠️ the replication package for **CWEMap** 
+# 🛠️ CWEMap Replication Package 
 
 
 > **CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches**
