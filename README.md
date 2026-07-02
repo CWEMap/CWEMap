@@ -84,13 +84,13 @@ We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** [1] a
 ```text
 CWEMap/
 ├── README.md
-│   └── Setup instructions, artifact description, and reproduction workflow
+│   └── Setup instructions, and reproduction workflow
 │
 ├── requirements.txt
 │   └── Python dependencies for pip-based installation
 │
 ├── environment.yml
-│   └── Conda environment specification for artifact evaluation
+│   └── Conda environment specification for evaluation
 │
 ├── configs/
 │   ├── default.yaml
@@ -157,11 +157,9 @@ CWEMap/
     ├── predictions/
     │   └── Predicted CWE paths and intermediate model outputs
     ├── metrics/
-    │   └── Weighted F1, Macro F1, MCC, Path Fraction, and confidence intervals
-    ├── tables/
-    │   └── CSV/LaTeX tables corresponding to manuscript results
-    └── figures/
-        └── Generated figures and pipeline diagrams
+    │   └── Weighted F1, Macro F1, MCC, Path Fraction
+    └── tables/
+        └── CSV/.json output
 
 
 ```
