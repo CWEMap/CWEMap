@@ -101,7 +101,7 @@ CWEMap follows phase evaluation pipeline. Each phase takes the output of the pre
 
 📜 **Phase 2: Phase-Aware Patch Graph Construction (PGC):**
 
-- `PhaseAwarePatchGraphConstructor` transforms the target patch and retrieved cases into phase-aware security triples (`Tbefore`, `T∆`, and `Tafter`).
+- `PhaseAwarePatchGraphConstructor` transforms the target patch and retrieved cases into phase-aware security triples (`T_before`, `T∆`, and `T_after`).
 - `PatchGraphBuilder` materializes these triples into `G_input` for the target patch and `K_Gexamples` for retrieved cases.
 - The graph workspace `{G_input, K_Gexamples, G_CWE}` is passed to `EvidenceAlignmentAgent`.
 
