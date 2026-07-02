@@ -91,35 +91,29 @@ python3 -m venv cwemap_env
 source cwemap_env/bin/activate
 ```
 
+CWEMap follows phase evaluation pipeline. Each phase takes the output of the previous phase as input and produces structured evidence for the next stage.
 
+## 🔄 Detailed Workflow of CWEMap
 
+📜 **Phase 1: Patch-Aware Vulnerability Retrieval (PVR):**
 
-CWEMap follows a four-phase evaluation pipeline. Each phase takes the output of the previous phase as input and produces structured evidence for the next stage.
+- `PatchAwareVulnerabilityRetriever` retrieves top-k historical vulnerability cases from the training-only corpus.
+- The `E_top-k`, the top-k retrieved historical cases, are passed to `PhaseAwarePatchGraphConstructor`.
 
-##### Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
+📜 **Phase 2: Phase-Aware Patch Graph Construction (PGC):**
 
-PVR retrieves the top-k structurally and semantically relevant historical vulnerability cases from the training-only corpus.
+- `PhaseAwarePatchGraphConstructor` transforms the target patch and retrieved cases into phase-aware security triples (`Tbefore`, `T∆`, and `Tafter`).
+- `PatchGraphBuilder` materializes these triples into `Ginput` for the target patch and `KGexamples` for retrieved cases.
+- The graph workspace `{Ginput, KGexamples, GCWE}` is passed to `EvidenceAlignmentAgent`.
 
-```bash
-python scripts/run_cwemap.py \
-  --phase pvr \
-  --input dataset/treevul/test_set.json \
-  --corpus dataset/treevul/train_set.json \
-  --output outputs/pvr/treevul_retrieved_cases.json
-```
-##### Phase 2: Phase-Aware Patch Graph Construction (PGC)
+📜 **Phase 3: Agent-Based Evidence Alignment (AEA):**
 
-PGC converts the target patch and retrieved reference cases into phase-aware security triples and graph-ready patch representations.
+- `EvidenceAlignmentAgent` verifies whether retrieved reference graphs are structurally compatible with the target patch graph.
+- It performs subgraph isomorphism matching using relation and phase compatibility checks.
+- `ResonanceEvidenceScoring` ranks the matched subgraphs using Hierarchical Node-Edge Resonance Proximity.
+- The aligned evidence package `Z` is passed to `HierarchicalReasoningAgent`.
 
-```bash
-python scripts/run_cwemap.py \
-  --phase pgc \
-  --input outputs/pvr/datasetname_retrieved_cases.json \
-  --output outputs/pgc/phase_aware_patch_graphs.json
-```
-#####  Phase 3: Agent-Based Evidence Alignment (AEA)
+📜 **Phase 4: Agent-Based Hierarchical Reasoning (AHR):**
 
-
-#####  Phase 4: Agent-Based Hierarchical Reasoning (AHR)
-
-
+- `HierarchicalReasoningAgent` decodes the CWE path over the frozen taxonomy graph `GCWE`.
+- The final high-confidence predicted CWE path $\hat{P}$ is saved for evaluation using Weighted F1, Macro F1, MCC, and Path Fraction.
