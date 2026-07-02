@@ -88,11 +88,17 @@ python scripts/run_cwemap.py \
   --input dataset/treevul/test_set.json \
   --corpus dataset/treevul/train_set.json \
   --output outputs/pvr/treevul_retrieved_cases.json
+```
+##### Phase 2: Phase-Aware Patch Graph Construction (PGC)
 
-#####  Phase 2: Phase-Aware Patch Graph Construction (PGC)
-Write  how we Do ( one line)
-Command to execute with --input --output path
+PGC converts the target patch and retrieved reference cases into phase-aware security triples and graph-ready patch representations.
 
+```bash
+python scripts/run_cwemap.py \
+  --phase pgc \
+  --input outputs/pvr/datasetname_retrieved_cases.json \
+  --output outputs/pgc/phase_aware_patch_graphs.json
+```
 #####  Phase 3: Agent-Based Evidence Alignment (AEA)
 Write  how we Do ( one line)
 Command to execute with --input --output path
