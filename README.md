@@ -1,6 +1,5 @@
-# 🛠️ CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches
+# 🛠️ the replication package for **CWEMap** 
 
-This repository contains the replication package for **CWEMap** :
 
 > **CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches**
 
@@ -73,6 +72,8 @@ CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE
 ## 📊 Datasets
 
 We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** [1] and **PRIMEVUL** [2].
+
+The dataset and preprocessing scripts are available in [`Dataset_Preprocessing/`](./Dataset_Preprocessing).
 
 **TREEVUL** contains real-world security patches annotated with hierarchical CWE paths, making it suitable for evaluating fine-grained commit-level vulnerability type classification.
 
