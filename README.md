@@ -5,7 +5,7 @@
 
 ![CWEMap Approach Overview](https://github.com/CWEMap/CWEMap/blob/d5f697b026bbc702f28bb528c013e9ed04648087/CWEMap.png?raw=true)
 
-The replication package supports the experiments reported in the manuscript, including effectiveness comparison, ablation analysis, cross-backbone generalizability, and efficiency analysis.
+The replication package supports the experiments reported in the manuscript, including dataset preprocessing, execution scripts, cross-backbone generalizability evaluation, and efficiency analysis.
 
 ## 🧭 1. Framework Overview
 
