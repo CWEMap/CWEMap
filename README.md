@@ -65,13 +65,12 @@ The datasets are publicly available through Google Drive below.
 
 Download Dataset: [Click here to access the dataset](https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing)
 
-
 ## 📂 Repository Structure
 
 ```text
 CWEMap/
 ├── README.md
-│   └── Setup instructions, and reproduction workflow
+│   └── Setup instructions, dataset access, and reproduction workflow
 │
 ├── requirements.txt
 │   └── Python dependencies for pip-based installation
@@ -89,23 +88,17 @@ CWEMap/
 │   └── llm_backbones.yaml
 │       └── Configuration for cross-backbone LLM experiments
 │
-├── data/
-│   ├── raw/
-│   │   ├── treevul/
-│   │   │   └── TREEVUL benchmark files
-│   │   └── primevul/
-│   │       └── PRIMEVUL benchmark files
+├── dataset/
+│   ├── treevul/
+│   │   ├── train_set.json
+│   │   ├── validation_set.json
+│   │   └── test_set.json
 │   │
-│   ├── processed/
-│   │   ├── treevul/
-│   │   │   └── Preprocessed TREEVUL splits and graph-ready inputs
-│   │   └── primevul/
-│   │       └── Preprocessed PRIMEVUL splits and graph-ready inputs
-│   │
-│   └── cwe/
-│       └── cwe_taxonomy.json
-│           └── Frozen CWE taxonomy graph used for hierarchical decoding
-│
+│   └── primevul/
+│       ├── primevul_train.jsonl
+│       ├── primevul_valid.jsonl
+│       └── primevul_test.jsonl
+│   
 ├── src/
 │   ├── retrieval/
 │   │   └── Patch-Aware Vulnerability Retrieval implementation
@@ -144,14 +137,10 @@ CWEMap/
     ├── predictions/
     │   └── Predicted CWE paths and intermediate model outputs
     ├── metrics/
-    │   └── Weighted F1, Macro F1, MCC, Path Fraction
+    │   └── Weighted F1, Macro F1, MCC, and Path Fraction results
     └── tables/
-        └── CSV/.json output
-
-
+        └── CSV/JSON output tables used in the manuscript
 ```
-
-
 
 ## 📚 References
 
