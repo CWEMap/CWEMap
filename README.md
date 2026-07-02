@@ -69,7 +69,6 @@ Datasets/
 │       ├── primevul_valid.jsonl
 │       └── primevul_test.jsonl
 ```
-## 📂 Evaluation
 
 ## 🚀 Prerequisites & Environment Setup
 
