@@ -9,37 +9,19 @@ The replication package supports the experiments reported in the manuscript, inc
 
 ## 🧭 1. Framework Overview
 
-CWEMap follows a four-stage flow: it retrieves patch-relevant historical cases, converts patches into phase-aware graphs, aligns structurally compatible evidence, and performs top-down CWE taxonomy reasoning.
-
-This enables CWEMap to predict fine-grained, taxonomy-consistent CWE paths from explicit patch-evolution evidence rather than raw patch text alone.
+CWEMap follows a four-stage graph-guided workflow for fine-grained commit-level CWE classification: it retrieves relevant historical cases, constructs phase-aware patch graphs, aligns structurally compatible evidence, and decodes a valid CWE path over the frozen CWE taxonomy graph.
 
 ### 🔎 Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
-
-CWEMap first retrieves the top-k patch-relevant historical vulnerability cases from a leakage-free training corpus. Each candidate case is represented using multiple evidence channels, including vulnerable code fragments, patched code fragments, diff hunks, localized method boundaries, and sanitized metadata. To prevent shortcut learning and train-test leakage, validation and test commits are excluded from the retrieval corpus, and label-revealing information such as CVE identifiers, issue links, and explicit CWE mentions is removed before retrieval.
+Retrieves top-k patch-relevant historical cases from a leakage-free training corpus after removing label-revealing metadata.
 
 ### 🧱 Phase 2: Phase-Aware Patch Graph Construction (PGC)
-
-CWEMap converts the target patch and retrieved cases into phase-aware security triples that represent the security-relevant transition introduced by the patch. Each patch is modeled using three temporal evidence phases:
-
-- `T_before`: Vulnerable pre-patch state
-- `T_delta`: Repair transformation
-- `T_after`: Mitigated post-patch state
-
-These triples are materialized into directed labeled graphs. The target patch becomes `G_input`, while the retrieved historical cases form the reference graph set `KG_examples`. Together with the frozen CWE taxonomy graph `G_CWE`, these graphs form the structured evidence workspace used by downstream reasoning.
+Extracts security triples from the target patch and retrieved cases, then builds phase-aware graphs using `T_before`, `T_delta`, and `T_after`. The target graph is `G_input`, and retrieved reference graphs form `KG_examples`.
 
 ### 🔗 Phase 3: Agent-Based Evidence Alignment (AEA)
-
-CWEMap aligns the target patch graph with retrieved reference graphs to verify whether the retrieved historical cases are structurally compatible with the target security patch. This stage applies constrained subgraph matching, including topology, edge direction, relation compatibility, and phase consistency. It then ranks aligned subgraphs using resonance evidence scoring and produces a graph-aligned evidence package `Z` for hierarchical CWE reasoning.
+Aligns `G_input` with `KG_examples` through constrained subgraph matching and evidence scoring to produce the graph-aligned package `Z`.
 
 ### 🌳 Phase 4: Agent-Based Hierarchical Reasoning (AHR)
-
-CWEMap performs constrained top-down decoding over the CWE taxonomy graph `G_CWE`. Rather than predicting an isolated flat CWE label, it expands only valid child nodes at each hierarchy level and scores candidate CWE paths using graph-aligned evidence, evidence coverage, mapping consistency, and taxonomy validity. If the confidence score is insufficient, CWEMap applies confidence-guided refinement before committing the final prediction.
-
-> 💡 **Key Innovation:**  
-> CWEMap’s key innovation is its graph-guided, taxonomy-aware reasoning mechanism that converts security patches into phase-aware evidence graphs, aligns them with structurally similar historical vulnerability cases, and predicts valid fine-grained CWE paths through constrained hierarchical decoding.
-
-
-## 🧭 CWEMap Workflow
+Performs top-down decoding over `G_CWE` to predict a taxonomy-consistent terminal CWE path, with confidence-guided refinement when needed.
 
 ```text
 🎯 [Target Vulnerability-Fixing Commit]
