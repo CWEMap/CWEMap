@@ -1,9 +1,7 @@
 
 ## 📊 Datasets
 
-We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** [1] and **PRIMEVUL** [2].
-
-The dataset and preprocessing scripts are available in [`Dataset_Preprocessing/`](./Dataset_Preprocessing).
+We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** and **PRIMEVUL**.
 
 **TREEVUL** contains real-world security patches annotated with hierarchical CWE paths, making it suitable for evaluating fine-grained commit-level vulnerability type classification.
 
