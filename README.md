@@ -61,7 +61,7 @@ The dataset and preprocessing scripts are available in [`Dataset_Preprocessing/`
 
 **PRIMEVUL** is a large-scale vulnerability benchmark collected from multiple open-source ecosystems. It covers 140 Common Weakness Enumeration (CWE) classes among vulnerability-labeled training instances; in CWEMap, CWE-path evaluation is conducted only on vulnerability-labeled samples with valid CWE annotations.
 
-The datasets used in this study are publicly available through Google Drive.
+The datasets are publicly available through Google Drive below.
 
 Download Dataset: [Click here to access the dataset](https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing)
 
