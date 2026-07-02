@@ -88,9 +88,9 @@ CWEMap/
 ├── data/
 │   ├── raw/
 │   │   ├── treevul/
-│   │   │   └── Raw TREEVUL benchmark files
+│   │   │   └── TREEVUL benchmark files
 │   │   └── primevul/
-│   │       └── Raw PRIMEVUL benchmark files
+│   │       └── PRIMEVUL benchmark files
 │   │
 │   ├── processed/
 │   │   ├── treevul/
