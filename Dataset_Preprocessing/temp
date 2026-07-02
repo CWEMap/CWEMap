@@ -1,1 +1,16 @@
+## Dataset Availability
 
+The datasets used in this study are publicly available through Google Drive.
+
+📂 **Download Dataset:** [Click here to access the dataset](https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing)
+
+The shared folder contains the processed datasets used for CWEMAP evaluation, including the TreeVul and PrimeVul train, validation, and test splits.
+
+### Download from Terminal
+
+You can also download the dataset using `gdown`:
+
+```bash
+pip install gdown
+
+gdown --folder "https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing" -O ./datasets
