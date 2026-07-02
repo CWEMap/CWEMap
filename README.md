@@ -11,11 +11,6 @@ The replication package supports the experiments reported in the manuscript, inc
 
 CWEMap follows a four-stage graph-guided workflow for fine-grained commit-level CWE classification: it retrieves relevant historical cases, constructs phase-aware patch graphs, aligns structurally compatible evidence, and decodes a valid CWE path over the frozen CWE taxonomy graph.
 
-#####  Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
-#####  Phase 2: Phase-Aware Patch Graph Construction (PGC)
-#####  Phase 3: Agent-Based Evidence Alignment (AEA)
-#####  Phase 4: Agent-Based Hierarchical Reasoning (AHR)
-Performs top-down decoding over `G_CWE` to predict a taxonomy-consistent terminal CWE path, with confidence-guided refinement when needed.
 
 ```text
 🎯 [Target Vulnerability-Fixing Commit]
@@ -75,6 +70,29 @@ Datasets/
 │       └── primevul_test.jsonl
 ```
 ## 📂 Evaluation
+
+## 🚀 Prerequisites & Environment Setup
+
+It is recommended to use a virtual environment to manage dependencies and ensure reproducibility.
+
+### System Requirements
+
+- **Operating System:** Ubuntu 22.04 LTS
+- **Python:** >= 3.9
+- **Perl:** >= 5.12
+- **Java:** 1.8
+
+### Create Virtual Environment
+
+Using `venv`:
+
+```bash
+python3 -m venv cwemap_env
+source cwemap_env/bin/activate
+```
+
+
+
 
 CWEMap follows a four-phase evaluation pipeline. Each phase takes the output of the previous phase as input and produces structured evidence for the next stage.
 
