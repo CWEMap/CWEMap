@@ -102,8 +102,8 @@ CWEMap follows phase evaluation pipeline. Each phase takes the output of the pre
 📜 **Phase 2: Phase-Aware Patch Graph Construction (PGC):**
 
 - `PhaseAwarePatchGraphConstructor` transforms the target patch and retrieved cases into phase-aware security triples (`Tbefore`, `T∆`, and `Tafter`).
-- `PatchGraphBuilder` materializes these triples into `Ginput` for the target patch and `KGexamples` for retrieved cases.
-- The graph workspace `{Ginput, KGexamples, GCWE}` is passed to `EvidenceAlignmentAgent`.
+- `PatchGraphBuilder` materializes these triples into `G_input` for the target patch and `K_Gexamples` for retrieved cases.
+- The graph workspace `{G_input, K_Gexamples, G_CWE}` is passed to `EvidenceAlignmentAgent`.
 
 📜 **Phase 3: Agent-Based Evidence Alignment (AEA):**
 
@@ -114,7 +114,7 @@ CWEMap follows phase evaluation pipeline. Each phase takes the output of the pre
 
 📜 **Phase 4: Agent-Based Hierarchical Reasoning (AHR):**
 
-- `HierarchicalReasoningAgent` decodes the CWE path over the frozen taxonomy graph `GCWE`.
+- `HierarchicalReasoningAgent` decodes the CWE path over the frozen taxonomy graph `G_CWE`.
 - The final high-confidence predicted CWE path $\hat{P}$ is saved for evaluation using Weighted F1, Macro F1, MCC, and Path Fraction.
 
 
