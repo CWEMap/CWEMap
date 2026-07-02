@@ -1,6 +1,6 @@
 # 🛠️ CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches
 
-This repository contains the replication package for **CWEMap**:
+This repository contains the replication package for **CWEMap** :
 
 > **CWEMap: Graph-Guided Reasoning for Fine-Grained CWE Classification of Security Patches**
 
