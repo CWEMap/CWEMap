@@ -139,7 +139,7 @@ CWEMap/
     ├── metrics/
     │   └── Weighted F1, Macro F1, MCC, and Path Fraction results
     └── tables/
-        └── CSV/JSON output tables used in the manuscript
+        └── CSV/JSON output
 ```
 
 ## 📚 References
