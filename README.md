@@ -59,7 +59,7 @@ The dataset and preprocessing scripts are available in [`Dataset_Preprocessing/`
 
 **TREEVUL** contains real-world security patches annotated with hierarchical CWE paths, making it suitable for evaluating fine-grained commit-level vulnerability type classification.
 
-**PRIMEVUL** is a large-scale vulnerability benchmark collected from multiple open-source ecosystems. It includes both vulnerable and benign code instances; in CWEMap, CWE-path evaluation is conducted on vulnerability-labeled instances with valid CWE annotations.
+**PRIMEVUL** is a large-scale vulnerability benchmark collected from multiple open-source ecosystems. It covers 140 Common Weakness Enumeration (CWE) classes among vulnerability-labeled training instances; in CWEMap, CWE-path evaluation is conducted only on vulnerability-labeled samples with valid CWE annotations.
 
 
 ## 📂 Repository Structure
