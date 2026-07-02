@@ -74,9 +74,32 @@ Datasets/
 │       ├── primevul_valid.jsonl
 │       └── primevul_test.jsonl
 ```
-## 📂 Training Phase
+## 📂 Evaluation
 
-## 📂 Testing Phase
+CWEMap follows a four-phase evaluation pipeline. Each phase takes the output of the previous phase as input and produces structured evidence for the next stage.
+
+##### Phase 1: Patch-Aware Vulnerability Retrieval (PVR)
+
+PVR retrieves the top-k structurally and semantically relevant historical vulnerability cases from the training-only corpus.
+
+```bash
+python scripts/run_cwemap.py \
+  --phase pvr \
+  --input dataset/treevul/test_set.json \
+  --corpus dataset/treevul/train_set.json \
+  --output outputs/pvr/treevul_retrieved_cases.json
+
+#####  Phase 2: Phase-Aware Patch Graph Construction (PGC)
+Write  how we Do ( one line)
+Command to execute with --input --output path
+
+#####  Phase 3: Agent-Based Evidence Alignment (AEA)
+Write  how we Do ( one line)
+Command to execute with --input --output path
+
+#####  Phase 4: Agent-Based Hierarchical Reasoning (AHR)
+Write  how we Do ( one line)
+Command to execute with --input --output path
 
 
 ## 📚 References
