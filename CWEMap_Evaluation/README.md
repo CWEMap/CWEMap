@@ -2,7 +2,7 @@
 
 ```
 CWEMap/
-├── main.py                                # single pipeline entrypoint
+├── main.py                               
 ├── configs/
 ├── phases/
 │   ├── phase1_patch_aware_retrieval.py    # Phase 1
