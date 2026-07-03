@@ -16,7 +16,7 @@ CWEMap/
 └── outputs/                               # JSON/Excel/CSV 
 ```
 
-## dataset split names
+## dataset split
 
 The source code and configs now explicitly use the original split names:
 
