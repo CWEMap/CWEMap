@@ -29,24 +29,15 @@ The source code and configs now explicitly use the original split names:
 The default full paths are:
 
 ```text
-Dataset_Preprocessing/dataset/datasetname/datasetname.jsonl
-Dataset_Preprocessing/dataset/datasetname/datasetname.jsonl
-Dataset_Preprocessing/dataset/datasetname/datasetname.jsonl
+Dataset_Preprocessing/dataset/datasetname/dataset_training.jsonl
+Dataset_Preprocessing/dataset/datasetname/dataset_testing.jsonl
+Dataset_Preprocessing/dataset/datasetname/dataset_validation.jsonl
 ```
-
-Recommended evaluation protocol:
-
-```text
-Validation run: input = datasetname.jsonl, corpus = datasetname.jsonl
-Testing run:    input = datasetname.jsonl,    corpus = datasetname.jsonl
-```
-
-This avoids retrieval leakage because validation/testing samples are never used as the retrieval corpus.
 
 
 ## Phase-to-phase data flow
 
-The pipeline is wired as a strict chain. In `main.py`, each phase returns an in-memory JSON object and the next phase consumes that object directly:
+The pipeline is wired as a strict chain:
 
 ```text
 PrimeVul split JSONL files
@@ -56,4 +47,40 @@ PrimeVul split JSONL files
   -> Phase 4 final CWE path prediction JSON/CSV/XLSX
 ```
 
+## Phase-Aware Security Triple Extraction Prompt
 
+**Role:**  
+You are an expert software security analyst and code-understanding engine.
+
+**Task:**  
+Analyze the provided code diff/commit to extract directed knowledge triples describing the underlying security vulnerability and its corresponding repair transformation.
+
+To prevent semantic shortcut learning and token-level noise, the extraction must be strictly mapped to a rigid three-phase temporal schema:
+
+- `T_before`: vulnerable state before the repair
+- `T_delta`: security-relevant repair transformation
+- `T_after`: corrected or safer state after the repair
+
+The extraction should not rely on generic API-call relationships. Instead, each predicate/relation must represent an abstract security-critical invariant.
+
+**Output Format:**  
+Output each extracted triple on a new line, grouped strictly under the corresponding temporal phase comments:
+
+```text
+# T_before
+(Head, Relation, Tail)
+
+# T_delta
+(Head, Relation, Tail)
+
+# T_after
+(Head, Relation, Tail)
+```
+
+Each line inside a phase must be formatted exactly as a three-variable graph tuple:
+
+```text
+(Head, Relation, Tail)
+```
+
+Do not output conversational prose, explanations, markdown wrappers, or any additional text outside the triples.
