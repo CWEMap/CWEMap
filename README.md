@@ -119,6 +119,45 @@ CWEMap follows phase evaluation pipeline. Each phase takes the output of the pre
 
 
 
+## Phase-Aware Security Triple Extraction Prompt
+
+**Role:**  
+You are an expert software security analyst and code-understanding engine.
+
+**Task:**  
+Analyze the provided code diff/commit to extract directed knowledge triples describing the underlying security vulnerability and its corresponding repair transformation.
+
+To prevent semantic shortcut learning and token-level noise, the extraction must be strictly mapped to a rigid three-phase temporal schema:
+
+- `T_before`: vulnerable state before the repair
+- `T_delta`: security-relevant repair transformation
+- `T_after`: corrected or safer state after the repair
+
+The extraction should not rely on generic API-call relationships. Instead, each predicate/relation must represent an abstract security-critical invariant.
+
+**Output Format:**  
+Output each extracted triple on a new line, grouped strictly under the corresponding temporal phase comments:
+
+```text
+# T_before
+(Head, Relation, Tail)
+
+# T_delta
+(Head, Relation, Tail)
+
+# T_after
+(Head, Relation, Tail)
+```
+
+Each line inside a phase must be formatted exactly as a three-variable graph tuple:
+
+```text
+(Head, Relation, Tail)
+```
+
+Do not output conversational prose, explanations, markdown wrappers, or any additional text outside the triples.
+
+
 ## ⚙️ Dependencies
 
 Install the required dependencies using pip:
