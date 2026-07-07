@@ -10,3 +10,6 @@ We evaluate **CWEMap** on two public vulnerability benchmarks: **TREEVUL** and *
 The datasets are publicly available through Google Drive below.
 
 Download Dataset: [Click here to access the dataset](https://drive.google.com/drive/folders/1ZNNrLlSb7GIvuvNFKMNDHEvGxci6WppK?usp=sharing)
+
+Triples of the Examples:
+[Click here to view the Triples Examples ](https://drive.google.com/drive/folders/1RoLDnjSu8twuz0g2v4xkKCz2v_pG3Jfj?usp=sharing)
