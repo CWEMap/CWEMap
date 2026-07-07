@@ -84,3 +84,9 @@ Each line inside a phase must be formatted exactly as a three-variable graph tup
 ```
 
 Do not output conversational prose, explanations, markdown wrappers, or any additional text outside the triples.
+
+
+Qualitative Analysis:
+
+[Click here to view the CWEMap Qualitative Analysis Folder](https://drive.google.com/drive/folders/1kfs2-wR3Ch4JLZrl2dYwwxyaaZIBWj-J?usp=sharing)
+
